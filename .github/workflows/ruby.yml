@@ -1,0 +1,33 @@
+name: Ruby
+
+env:
+  SECRETS_TOKEN: ${{ secrets.PAT }}
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4   # або @v5
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          working-directory: '.github/tests'
+          bundler-cache: true
+
+      - name: Run tests
+        env:
+          URL: ${{ github.repository }}
+          TOKEN: ${{ secrets.PAT }}          # ← ОБОВ’ЯЗКОВО
+          SECRETS_TOKEN: ${{ secrets.PAT }}
+        working-directory: '.github/tests'
+        run: ruby test/script_test.rb

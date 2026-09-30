@@ -1,0 +1,6 @@
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+user1:x:1001:1001::/home/user1:/bin/bash
+user2:x:1002:1002::/home/user2:/bin/sh
+user3:x:1003:1003::/home/user3:/bin/bash
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
